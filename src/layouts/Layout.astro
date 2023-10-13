@@ -1,9 +1,7 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 import Video from "../components/astro/Video.astro";
-import Card from "../components/Card.astro";
-import LanguagePicker from '../components/LanguagePicker.astro';
-
+import LanguagePicker from "../components/LanguagePicker.astro";
 
 interface Props {
   title: string;
@@ -11,15 +9,7 @@ interface Props {
 
 const { title } = Astro.props;
 
-import { testVar } from "../stores/testStore";
-import { useStore } from "@nanostores/vue";
-
-var $refTestVar = useStore(testVar);
-// $refTestVar = $refTestVar.value
-console.log($refTestVar);
-const val = $refTestVar.value || false;
-
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -59,7 +49,6 @@ const lang = getLangFromUrl(Astro.url);
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/styles/global.scss" />
 
-
     <meta name="generator" content={Astro.generator} />
     <ViewTransitions />
     <title>{title}</title>
@@ -79,65 +68,5 @@ const lang = getLangFromUrl(Astro.url);
     <footer>
       <LanguagePicker />
     </footer>
-    
-    <!-- <div class="astro-container">
-      <Card
-        href="#"
-        title="Componente ASTRO "
-        :body="`State in ASTRO: ${String(val)}`"
-        slot="astro-component"
-      />
-    </div> -->
-
-    <style is:global>
-      :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(
-          45deg,
-          rgb(var(--accent)),
-          rgb(var(--accent-light)) 30%,
-          white 60%
-        );
-      }
-      html {
-        font-family: system-ui, sans-serif;
-        background: #13151a;
-        background-size: 224px;
-      }
-      code {
-        font-family:
-          Menlo,
-          Monaco,
-          Lucida Console,
-          Liberation Mono,
-          DejaVu Sans Mono,
-          Bitstream Vera Sans Mono,
-          Courier New,
-          monospace;
-      }
-      .video-container {
-        position: relative;
-        padding-top: 30px;
-        overflow: hidden;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-      }
-      .video-description {
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 600;
-        width: 30%;
-        padding: 20px;
-      }
-      .astro-container {
-        margin: auto;
-        padding: 1rem;
-        width: 800px;
-        max-width: calc(100% - 2rem);
-      }
-    </style>
   </body>
 </html>

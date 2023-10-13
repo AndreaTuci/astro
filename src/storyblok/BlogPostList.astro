@@ -1,6 +1,6 @@
 ---
-import { storyblokEditable, renderRichText } from "@storyblok/astro";
 import { useStoryblokApi } from "@storyblok/astro";
+import type { Post } from "../types/global";
 
 const storyblokApi = useStoryblokApi();
 
@@ -26,7 +26,7 @@ const { blok } = Astro.props;
 <div class="card-container">
   <div class="column">
     {
-      posts.slice(0, Math.ceil(posts.length / 2)).map((post) => (
+      posts.slice(0, Math.ceil(posts.length / 2)).map((post: Post) => (
         <div class="modal">
           <div class="img">
             <img src={post.image} />

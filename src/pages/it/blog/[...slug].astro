@@ -4,6 +4,11 @@ import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro'
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
+  /**
+   * Retrieves a list of blog post stories from the Storyblok API and returns an array of paths for static generation.
+   * 
+   * @returns {Array} An array of objects, where each object represents a path for static generation and contains a `slug` parameter.
+   */
   const sbApi = useStoryblokApi();
 
   const { data } = await sbApi.get("cdn/stories", {
@@ -12,8 +17,9 @@ export async function getStaticPaths() {
   });
 
   const stories = Object.values(data.stories);
+  
 
-  return stories.map((story) => {
+  return stories.map((story: any) => {
     return {
       params: { slug: story.slug },
     };

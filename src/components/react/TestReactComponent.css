@@ -1,0 +1,10 @@
+.react-component {
+    background-color: #5ed3f3;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }

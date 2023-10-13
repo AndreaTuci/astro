@@ -1,0 +1,65 @@
+---
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
+import { useStoryblokApi } from "@storyblok/astro";
+
+const storyblokApi = useStoryblokApi();
+
+const { data } = await storyblokApi.get("cdn/stories", {
+  version: import.meta.env.DEV ? "draft" : "published",
+  content_type: "blogPost",
+});
+
+const posts = data.stories.map((story) => {
+  console.log("story", story.content.image);
+  return {
+    title: story.content.title,
+    date: new Date(story.content.published_at).toLocaleDateString("it-IT"),
+    description: story.content.description,
+    slug: story.full_slug,
+    image: story.content.image,
+  };
+});
+
+const { blok } = Astro.props;
+---
+
+<div class="card-container">
+  <div class="column">
+    {
+      posts.slice(0, Math.ceil(posts.length / 2)).map((post) => (
+        <div class="modal">
+          <div class="img">
+            <img src={post.image} />
+          </div>
+          <p class="title">{post.title}</p>
+          <div class="descParent">
+            <div class="desc">{post.description}</div>
+          </div>
+          <a class="btn" href={post.slug}>
+            Leggi 💥
+          </a>
+        </div>
+      ))
+    }
+  </div>
+  <div class="column">
+    {
+      posts.slice(Math.ceil(posts.length / 2)).map((post) => (
+        <div class="modal">
+          <div class="img">
+            <img src={post.image} />
+          </div>
+          <p class="title">{post.title}</p>
+          <div class="descParent">
+            <div class="desc">{post.description}</div>
+          </div>
+          <a class="btn" href={post.slug}>
+            Leggi 💥
+          </a>
+        </div>
+      ))
+    }
+  </div>
+  <a class="btn" style="position: absolute;
+    bottom: 0;" href="/"> Home</a>
+</div>

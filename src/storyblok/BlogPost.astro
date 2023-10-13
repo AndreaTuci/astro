@@ -1,0 +1,25 @@
+---
+import { storyblokEditable, renderRichText } from "@storyblok/astro";
+const { blok } = Astro.props;
+const content = renderRichText(blok.content);
+---
+
+<article {...storyblokEditable(blok)}>
+  <h1 class="name">{blok.title}</h1>
+  <div style="margin-top: 4rem">
+    <p>{blok.description}</p>
+    <Fragment set:html={content} />
+    <div
+      class="img"
+      style="max-width: 200px;
+    margin: 2rem -2rem 0 0;
+    background: var(--purple);
+    justify-content: flex-end;"
+    >
+      <img src={blok.image} />
+    </div>
+  </div>
+  <a class="btn" style="margin-bottom: 4rem;" href="/blog-index">
+    Indietro
+  </a>
+</article>

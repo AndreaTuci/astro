@@ -1,11 +1,15 @@
 ---
 import { storyblokEditable, renderRichText } from "@storyblok/astro";
+import { getLangFromUrl } from '../i18n/utils'
+
 const { blok } = Astro.props;
 const content = renderRichText(blok.content);
+const lang = getLangFromUrl(Astro.url);
+
 ---
 
 <article {...storyblokEditable(blok)}>
-  <h1 class="name">{blok.title}</h1>
+  <h1 class="name" style="color: var(--green)">{blok.title}</h1>
   <div style="margin-top: 4rem">
     <p>{blok.description}</p>
     <Fragment set:html={content} />
@@ -19,7 +23,7 @@ const content = renderRichText(blok.content);
       <img src={blok.image} />
     </div>
   </div>
-  <a class="btn" style="margin-bottom: 4rem;" href="/blog-index">
+  <a class="btn" style="margin-bottom: 4rem;" href={`/${lang}/blog-index`}>
     Indietro
   </a>
 </article>
